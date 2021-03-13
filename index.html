@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cal</title>
+</head>
+<style>
+body{
+    background-image: linear-gradient(50deg, black 0%, #7f878b 100%);
+    
+}
+.container {
+ width: 300px;
+ padding:0px 10px;
+ margin: 0px auto;
+}
+table {
+ margin: 0px 5px 5px 5px;
+}
+button {
+ width: 50px; 
+ height: 50px; 
+ font-size: 22px;
+ background-color: rgba(22, 21, 22, 0.5);
+ color: rgb(243, 231, 231);
+ border: 2px rgb(99, 66, 99) outset;
+ border-radius: 5px;
+ outline: none;
+ cursor: pointer;
+}
+.top {
+ height: 30px; 
+ background-color: #009788;
+ border-radius: 4px;
+ border: 1px green outset;
+ color: #fff;
+   font-size: 16px;
+}
+#c {
+ height: 50px;
+ color: #fff;
+ font-weight: bold;
+}
+button:hover{
+ background-color: #a9a;
+}
+.top:active{
+ background-color: rgb(202, 25, 114);
+ box-shadow: none ;
+ padding-top: 4px;
+ outline: 1px solid rgb(206, 35, 206);
+ border: 3px rgb(29, 82, 182) inset;
+}
+#display-container {
+ border: 3px inset;
+ margin-bottom: 10px;
+}
+#h1, #display1 { 
+ width: 260px; 
+ height: 25px; 
+ padding: 2px;
+ padding-top: 4px; 
+ background-color:powderblue; 
+ font-size: 22px;
+ font-family: sans-serif;
+ font-weight: bold;
+ text-align: right;
+ overflow: hidden;
+ font-weight:bold;
+ color: #245;
+ text-shadow: 2px 2px 1px #8ac;
+}
+#display1 {
+ font-size: 20px;
+}
+.div {
+ border: 5px #6bc ridge  ;
+ border-radius: 10px;
+ margin: 0px 5px 5px 5px;
+ padding-top: 0px;
+ width: 286px;
+   background-color: #689;
+ font-size: 11px;
+ color: white;
+}
+.w {
+ box-shadow: -10px 10px 10px silver;
+ border: 5px #6bc groove;
+ margin: 0px 5px 5px 5px;
+ border-radius: 10px;
+ padding-top: 0px;
+ font-size: 11px;
+ cursor: pointer;
+ width: 285px;
+ color: white;
+}
+</style>
+<body>
+    <div class="container">
+        <div class="div">
+        <table>
+        <tr>
+        <td colspan="5"><div id="display-container">
+            <div id="display1">
+                </div><div id="h1">
+
+                </div>
+            </div>
+        
+        </td>
+        </tr>
+        
+       
+        
+        <!--اول رف-->
+       
+        <tr>
+                <td><button onclick='getElementById("h1").innerHTML = digit("7")'> 7</button></td>
+                <td><button onclick='getElementById("h1").innerHTML = digit("8")'>8</button></td>
+                <td><button onclick='getElementById("h1").innerHTML = digit("9")'>9</button></td>
+                <td><button onclick='getElementById("h1").innerHTML = operators("+")'>+</button></td>
+  
+        </tr>
+        <!--ثاني رف-->
+
+        <tr>
+                <td><button onclick='getElementById("h1").innerHTML = digit("4")'>4</button></td>
+                <td><button onclick='getElementById("h1").innerHTML = digit("5")'>5</button></td>
+                <td><button onclick='getElementById("h1").innerHTML = digit("6")'>6</button></td>
+                <td><button onclick='getElementById("h1").innerHTML = operators("-")'>-</button></td>
+ 
+        </tr>
+        <!--ثالث رف-->
+
+        <tr>
+                <td><button onclick='getElementById("h1").innerHTML = digit("1")'>1</button></td>
+                <td><button onclick='getElementById("h1").innerHTML = digit("2")'>2</button></td>
+                <td><button onclick='getElementById("h1").innerHTML = digit("3")'>3</button></td>
+                <td><button onclick='getElementById("h1").innerHTML = operators("/")'>/</button></td>
+        
+        </tr>
+        <!--رابغ رف-->
+
+        <tr>
+                <td><button onclick='getElementById("h1").innerHTML = dot(".")'>.</button></td>
+                <td><button onclick='getElementById("h1").innerHTML = digit("0")'>0</button></td>
+                <td><button onclick='getElementById("h1").innerHTML = equal()'>=</button></td>
+                <td><button onclick='getElementById("h1").innerHTML = operators("*")'>X</button></td>
+                 <td rowspan="2"><button id="c" class="top" onclick='getElementById("h1").innerHTML = c("")'>AC</button></td> <!--للمسح-->
+        
+        </tr> 
+        </table>
+        </div>
+        </div>
+        <script>
+       //تهيئة الحاسبة لبدء العمليات
+ var decimalPoint = enter = entered = operatorSign = rootNpower_Sign = flo = math = M = firstI = first = second = secondI = answer = theanswer = result = peSign = "";
+var opsCheck = dotCounter = 0;
+var removeFirstZero = "";
+function dot(b) {
+ if (decimalPoint == "") {
+ enter = entered = b;
+ first+= enter;
+ entered+= enter;
+ decimalPoint = ".";
+ dotCounter = 0;
+ return first;
+ } else {
+ return first;
+ }
+}
+/********************************************************************/
+//remove خحثقشفهىل
+function c(c) {
+ document.getElementById("display1").innerHTML = decimalPoint = operatorSign = rootNpower_Sign = entered = math = first = firstI = second = secondI = answer = theanswer = flo = M = "";
+ return "";
+}
+/**********************************************/
+function maths(a) {
+ math = a;
+ try {
+ if (operatorSign == "+") {
+
+ 
+ 
+ first = second + "+" + result;
+ } 
+ else if (operatorSign == "-") 
+ {
+
+ 
+ 
+ first = second + "-" + "(" + result + ")";
+ } 
+ else if (operatorSign == "*") 
+ {
+
+ 
+ 
+ first = second + "*" + result;
+ } 
+ else if (operatorSign == "/") 
+ {
+ 
+ first = second + "/" + result;
+ } 
+ else 
+ {
+ firstI = first;
+ 
+ first = result;
+ }
+ return first;
+ } catch (first ) 
+ {
+ first = second + operatorSign;
+ return first;
+ }
+}
+function digit(b) {
+ opsCheck = 0;
+ dotCounter++;
+ if (first == Infinity || first == NaN) {
+ first = 0;
+ }
+ peSign = "pes";
+ entered = b;
+ if (rootNpower_Sign != "") {
+ first = (first === "0" && entered !== ".") ? entered: first + entered;
+ return secondI + firstI + rootNpower_Sign + first;
+ } else {
+ first = (first === "0" && entered !== ".") ? entered: first + entered;
+ theanswer = eval(first) + "";
+ if (theanswer.length > 14) {
+ theanswer = Math.abs((theanswer*1).toPrecision(14));
+ }
+   document.getElementById("display1").innerHTML = first;
+ return theanswer;
+ }
+}
+
+function operators(b) {
+ peSign = "";
+ if (opsCheck == 0) {
+ opsCheck = 1;
+ document.getElementById("display1").innerHTML = first;
+ try {
+ if (rootNpower_Sign == "^") {
+ if (operatorSign == "+") {
+
+ answer = result + second;
+ } else if (operatorSign == "-") {
+
+ answer = second - result;
+ } else if (operatorSign == "*") {
+
+ answer = result * second;
+ } else if (operatorSign == "/") {
+
+ answer = second / result;
+ } else {
+
+ answer = result;
+ }
+ } else if (rootNpower_Sign == "√") {
+ if (operatorSign == "+") {
+ roots();
+ answer = second + result;
+ } else if (operatorSign == "-") {
+ roots();
+ answer = second - result;
+ } else if (operatorSign == "*") {
+ roots();
+ answer = result * second;
+ } else if (operatorSign == "/") {
+ roots();
+ answer = second / result;
+ } else {
+ roots();
+ answer = result;
+ }
+ } else if (a == "%") {
+ answer = second % first;
+ } else {
+ operatorSign = b;
+ first += operatorSign;
+ decimalPoint = "";
+ }
+ rootNpower_Sign = "";
+ operatorSign = b;
+ firstI = "";
+ second = answer;
+ first = answer + operatorSign;
+ decimalPoint = "";
+document.getElementById("display1").innerHTML = first;
+ return eval(second);
+ } catch(x) {
+ if (first != "") {
+ operatorSign = b;
+ second = eval(first);
+ first += operatorSign;
+ decimalPoint = "";
+ } else {
+ first = "" ;
+ }
+ document.getElementById("display1").innerHTML = first;
+ return (second == undefined ) ? 0 : eval(second);
+ }
+ } 
+ else {
+ operatorSign = b;
+ first += "";
+ first = first.substr(0, first.length - 1);
+ first = first + operatorSign;
+ document.getElementById("display1").innerHTML = first;
+ return (second == undefined ) ? 0 : eval(second);
+ }
+}
+function percent() {
+ first = eval(first) * 100;
+ return first + "%";
+}
+        </script>
+        </body>
+       </html>
+
+
+
+
+
+</body>
+</html>
